@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('answer_text');
             $table->unsignedBigInteger('quiz_id');
-            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

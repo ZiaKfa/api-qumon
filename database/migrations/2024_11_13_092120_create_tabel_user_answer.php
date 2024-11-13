@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('user_answer', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_answer');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('quiz_id');
             $table->string('text');
             $table->timestamps();
         });
 
         schema::table('user_answer', function (Blueprint $table) {
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_answer')->references('id')->on('answer');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('quiz_id')->references('id')->on('quiz');
         });
     }
 

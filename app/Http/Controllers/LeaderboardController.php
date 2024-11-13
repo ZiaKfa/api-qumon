@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserAnswer;
+
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Answer;
+use App\Models\UserAnswer;
 
 
 class LeaderboardController extends Controller
@@ -14,19 +16,40 @@ class LeaderboardController extends Controller
      */
     public function index()
     {
-        $correct_answer = UserAnswer::where('is_correct', 1)->get();
-        $grouped_answer = $correct_answer->groupBy('user_id');
-        $data = $grouped_answer->map(function ($item) {
-            $user = User::find($item[0]->user_id);
+        $correct_answers = UserAnswer::where('is_correct', 1)
+            ->get();
+    
+        $data = $correct_answers->groupBy('user_id')->map(function ($answers, $userId) {
             return [
-                'user' => $user->name,
-                'total_correct_answer' => count($item)
+                'user' => $answers->first()->user->name,
+                'total_correct_answer' => $answers->count()
             ];
-        });
+        })->values();
+    
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil diambil',
             'data' => $data
         ]);
     }
+
+    public function weekly(){
+        $correct_answers = UserAnswer::where('is_correct', 1)
+            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->get();
+    
+        $data = $correct_answers->groupBy('user_id')->map(function ($answers, $userId) {
+            return [
+                'user' => $answers->first()->user->name,
+                'total_correct_answer' => $answers->count()
+            ];
+        })->values();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diambil',
+            'data' => $data
+        ]);
+    }
+    
 }

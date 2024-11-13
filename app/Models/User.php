@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function userAnswers()
+    {
+        return $this->belongsToMany(Quiz::class, 'user_answers', 'user_id', 'quiz_id');
+    }
 }

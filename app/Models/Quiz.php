@@ -15,4 +15,17 @@ class Quiz extends Model
         'category_id',
         'is_private',
     ];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function userAnswer(){
+        return $this->belongsToMany(User::class);
+    }
 }
