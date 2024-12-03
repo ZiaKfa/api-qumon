@@ -19,7 +19,7 @@ class AuthController extends Controller
     }
 
     public function login(Request $request): PostResource{
-        $data = User::where('email', $request->email)->first();
+        $data = User::where('name', $request->name)->first();
         if($data){
             if(password_verify($request->password, $data->password)){
                 return new PostResource(true, 'Login berhasil', $data);
@@ -27,7 +27,7 @@ class AuthController extends Controller
                 return new PostResource(false, 'Password salah', null);
             }
         }else{
-            return new PostResource(false, 'Email tidak terdaftar', null);
+            return new PostResource(false, 'Name tidak terdaftar', null);
         }
     }
 }
