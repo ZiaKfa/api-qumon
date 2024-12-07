@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('/users', App\Http\Controllers\UserController::class);
 Route::apiResource('/quiz', App\Http\Controllers\QuizController::class);
+Route::apiResource('/kategori', App\Http\Controllers\CategoryController::class);
 Route::post('/register', 'App\Http\Controllers\AuthController@register');
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::get('/leaderboard', 'App\Http\Controllers\LeaderboardController@index');
