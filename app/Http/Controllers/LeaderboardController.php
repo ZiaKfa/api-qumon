@@ -21,10 +21,10 @@ class LeaderboardController extends Controller
     
         $data = $correct_answers->groupBy('user_id')->map(function ($answers, $userId) {
             return [
-                'user' => $answers->first()->user->name,
-                'total_correct_answer' => $answers->count()
+            'user' => $answers->first()->user->name,
+            'total_correct_answer' => $answers->count()
             ];
-        })->values();
+        })->values()->sortByDesc('total_correct_answer')->values();
     
         return response()->json([
             'success' => true,
@@ -43,7 +43,7 @@ class LeaderboardController extends Controller
                 'user' => $answers->first()->user->name,
                 'total_correct_answer' => $answers->count()
             ];
-        })->values();
+        })->values()->sortByDesc('total_correct_answer')->values();
     
         return response()->json([
             'success' => true,
