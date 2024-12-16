@@ -27,6 +27,7 @@ class UserAnswerController extends Controller
     {
         $data = UserAnswer::create([
             'user_id' => $request->user_id,
+            'text' => $request->answer_text,
             'quiz_id' => $request->quiz_id,
             'answer_id' => $request->answer_id,
             'is_correct' => $request->is_correct

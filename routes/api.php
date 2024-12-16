@@ -12,4 +12,8 @@ Route::middleware('auth.basic')->group(function () {
     Route::apiResource('/kategori', App\Http\Controllers\CategoryController::class);
     Route::get('/leaderboard', 'App\Http\Controllers\LeaderboardController@index');
     Route::get('/leaderboard/weekly', 'App\Http\Controllers\LeaderboardController@weekly');
+    Route::get('/users/category', 'App\Http\Controllers\LeaderboardController@showCategory');
+    Route::get('/quiz/store', 'App\Http\Controllers\QuizController@store');
+    Route::apiResource('/answer', App\Http\Controllers\AnswerController::class);
+    Route::apiResource('/useranswer', App\Http\Controllers\UserAnswerController::class);
 });

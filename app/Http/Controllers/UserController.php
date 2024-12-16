@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Category;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,6 +38,11 @@ class UserController extends Controller
 
     public function show($id): PostResource{
         $data = User::find($id);
+        return new PostResource(true, 'Data berhasil diambil', $data);
+    }
+
+    public function showCategory($id): PostResource{
+        $data = Category::find($id);
         return new PostResource(true, 'Data berhasil diambil', $data);
     }
 
