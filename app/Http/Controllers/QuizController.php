@@ -19,7 +19,7 @@ class QuizController extends Controller
         $quiz = Quiz::where('is_private', 0)->inRandomOrder()->get();
         $data = $quiz->map(function ($q) {
             $user = User::find($q->user_id);
-            $answer = Answer::where('quiz_id', $q->id)->first();
+            $answer = Answer::where('quiz_id', $q->id)->inRandomOrder()->first();
             $category = Category::find($q->category_id);
             return [
                 'id' => $q->id,
@@ -92,6 +92,11 @@ class QuizController extends Controller
     public function findQuizByUser($user_id)
     {
         $data = Quiz::where('user_id', $user_id)->get();
+        return new PostResource(true, 'Data berhasil diambil', $data);
+    }
+    public function findQuizByUserAndCategory($user_id, $category_id)
+    {
+        $data = Quiz::where('user_id', $user_id)->where('category_id', $category_id)->get();
         return new PostResource(true, 'Data berhasil diambil', $data);
     }
 }

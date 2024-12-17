@@ -15,6 +15,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $encrypted
         ]);
+
         return new PostResource(true, 'Data berhasil ditambahkan', $data);
     }
 

@@ -13,7 +13,9 @@ Route::middleware('auth.basic')->group(function () {
     Route::get('/leaderboard', 'App\Http\Controllers\LeaderboardController@index');
     Route::get('/leaderboard/weekly', 'App\Http\Controllers\LeaderboardController@weekly');
     Route::get('/users/category', 'App\Http\Controllers\LeaderboardController@showCategory');
-    Route::get('/quiz/store', 'App\Http\Controllers\QuizController@store');
+    Route::get('/quiz/user/{id}', 'App\Http\Controllers\QuizController@findQuizByUser');
+    Route::get('/quiz/category/{id}', 'App\Http\Controllers\QuizController@findQuizByCategory');
+    Route::get('/quiz/{user_id}/{category_id}', 'App\Http\Controllers\QuizController@findQuizByUserAndCategory');
     Route::apiResource('/answer', App\Http\Controllers\AnswerController::class);
     Route::apiResource('/useranswer', App\Http\Controllers\UserAnswerController::class);
 });
